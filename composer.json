@@ -4,8 +4,8 @@
   "license": "MIT",
   "description": "Webman redis",
   "require": {
-    "workerman/webman-framework": "^2.0",
-    "webman/coroutine": "^1.0",
+    "workerman/webman-framework": "^2.0 || dev-master",
+    "webman/coroutine": "^1.0 || dev-main",
     "illuminate/redis": "^10.0"
   },
   "autoload": {
