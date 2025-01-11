@@ -19,7 +19,7 @@ return [
         'port' => 6379,
         'database' => 0,
         'pool' => [
-            'max_connections' => 10,
+            'max_connections' => 5,
             'min_connections' => 1,
             'wait_timeout' => 3,
             'idle_timeout' => 60,
