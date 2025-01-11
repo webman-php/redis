@@ -15,6 +15,7 @@
 namespace support;
 
 use Illuminate\Redis\Connections\Connection;
+use Throwable;
 use Webman\Redis\RedisManager;
 use Redis as RedisClient;
 use function config;
@@ -260,6 +261,7 @@ class Redis
      * Connection.
      * @param string $name
      * @return Connection|RedisClient
+     * @throws Throwable
      */
     public static function connection(string $name = 'default'): Connection
     {
@@ -270,6 +272,7 @@ class Redis
      * @param string $name
      * @param array $arguments
      * @return mixed
+     * @throws Throwable
      */
     public static function __callStatic(string $name, array $arguments)
     {

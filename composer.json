@@ -6,7 +6,7 @@
   "require": {
     "workerman/webman-framework": "^2.0 || dev-master",
     "webman/coroutine": "^1.0 || dev-main",
-    "illuminate/redis": "^10.0"
+    "illuminate/redis": "^10.0 || ^11.0"
   },
   "autoload": {
     "psr-4": {
