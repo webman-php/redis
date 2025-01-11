@@ -18,6 +18,7 @@ class Install
     {
         $redis_file = config_path('redis.php');
         if (!is_file($redis_file)) {
+            echo 'Create config/redis.php' . PHP_EOL;
             copy(__DIR__ . '/config/redis.php', $redis_file);
         }
         static::installByRelation();
@@ -31,6 +32,7 @@ class Install
     {
         $redis_file = config_path('redis.php');
         if (is_file($redis_file)) {
+            echo 'Remove config/redis.php' . PHP_EOL;
             unlink($redis_file);
         }
         self::uninstallByRelation();

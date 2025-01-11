@@ -1,5 +1,4 @@
 <?php
-
 /**
  * This file is part of webman.
  *
@@ -14,18 +13,17 @@
  */
 
 return [
-    'default' => 'file',
-    'stores' => [
-        'file' => [
-            'driver' => 'file',
-            'path' => runtime_path('cache')
+    'default' => [
+        'password' => '',
+        'host' => '127.0.0.1',
+        'port' => 6379,
+        'database' => 0,
+        'pool' => [
+            'max_connections' => 10,
+            'min_connections' => 1,
+            'wait_timeout' => 3,
+            'idle_timeout' => 60,
+            'heartbeat_interval' => 50,
         ],
-        'redis' => [
-            'driver' => 'redis',
-            'connection' => 'default'
-        ],
-        'array' => [
-            'driver' => 'array'
-        ]
     ]
 ];
