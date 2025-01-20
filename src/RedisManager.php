@@ -7,7 +7,8 @@ use Illuminate\Redis\Connections\Connection;
 use StdClass;
 use Throwable;
 use Webman\Context;
-use Webman\Coroutine\Pool;
+use Workerman\Coroutine\Pool;
+use Workerman\Coroutine\Coroutine;
 
 class RedisManager extends \Illuminate\Redis\RedisManager
 {
@@ -51,7 +52,7 @@ class RedisManager extends \Illuminate\Redis\RedisManager
                 $connection = static::$pools[$name]->get();
                 Context::set($key, $connection);
             } finally {
-                Context::onDestroy(function () use ($connection, $name) {
+                Coroutine::defer(function () use ($connection, $name) {
                     try {
                         $connection && static::$pools[$name]->put($connection);
                     } catch (Throwable) {
