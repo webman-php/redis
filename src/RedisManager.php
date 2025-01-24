@@ -8,7 +8,6 @@ use StdClass;
 use Throwable;
 use Webman\Context;
 use Workerman\Coroutine\Pool;
-use Workerman\Coroutine\Coroutine;
 
 class RedisManager extends \Illuminate\Redis\RedisManager
 {
