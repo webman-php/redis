@@ -52,7 +52,7 @@ class RedisManager extends \Illuminate\Redis\RedisManager
                 $connection = static::$pools[$name]->get();
                 Context::set($key, $connection);
             } finally {
-                Coroutine::defer(function () use ($connection, $name) {
+                Context::onDestroy(function () use ($connection, $name) {
                     try {
                         $connection && static::$pools[$name]->put($connection);
                     } catch (Throwable) {
