@@ -43,7 +43,7 @@ class RedisManager extends \Illuminate\Redis\RedisManager
                     $connection->client()->close();
                 });
                 $pool->setHeartbeatChecker(function ($connection) {
-                    return $connection->ping();
+                    $connection->ping();
                 });
                 static::$pools[$name] = $pool;
             }
