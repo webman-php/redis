@@ -6,6 +6,7 @@ use Illuminate\Events\Dispatcher;
 use Illuminate\Redis\Connections\Connection;
 use StdClass;
 use Throwable;
+use WeakMap;
 use Webman\Context;
 use Workerman\Coroutine\Pool;
 
@@ -15,6 +16,11 @@ class RedisManager extends \Illuminate\Redis\RedisManager
      * @var Pool[]
      */
     protected static array $pools = [];
+
+    /**
+     * @var WeakMap
+     */
+    protected WeakMap $allConnections;
 
     /**
      * Get connection.
@@ -37,6 +43,8 @@ class RedisManager extends \Illuminate\Redis\RedisManager
                     if (class_exists(Dispatcher::class)) {
                         $connection->setEventDispatcher(new Dispatcher());
                     }
+                    $this->allConnections ??= new WeakMap();
+                    $this->allConnections[$connection] = true;
                     return $connection;
                 });
                 $pool->setConnectionCloser(function ($connection) {
@@ -61,5 +69,22 @@ class RedisManager extends \Illuminate\Redis\RedisManager
             }
         }
         return $connection;
+    }
+
+    /**
+     * Return all the created connections.
+     *
+     * @return array
+     */
+    public function connections()
+    {
+        if (empty($this->allConnections)) {
+            return [];
+        }
+        $connections = [];
+        foreach ($this->allConnections as $connection => $_) {
+            $connections[] = $connection;
+        }
+        return $connections;
     }
 }
